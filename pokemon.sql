@@ -1,43 +1,40 @@
 CREATE TABLE pokemon(
-  idpokemon SERIAL PRIMARY KEY,
-  nombre VARCHAR(20) NOT NULL,
-  tipo1 VARCHAR(20) NOT NULL,
-  tipo2 VARCHAR(20),
-  habilidad VARCHAR(20) NOT NULL,
-  ataque integer CHECK(ataque >= 1 AND ataque <= 100),
-  defensa integer CHECK (defensa >= 1 AND defensa <= 100),
-  velocidad integer CHECK (velocidad >= 1 AND velocidad <= 100),
-  vida integer CHECK (vida >= 1 AND vida <= 200)
+	id_pokemon SERIAL PRIMARY KEY,
+	nombre VARCHAR(20) NOT NULL,
+	tipo1 VARCHAR(20) NOT NULL,
+	tipo2 VARCHAR (20),
+	habilidad VARCHAR(50) NOT NULL,
+	ataque INTEGER CHECK (ataque >= 1 AND ataque < 100),
+	defensa INTEGER CHECK (defensa >= 1 AND defensa < 100),
+	velocidad INTEGER CHECK (velocidad >= 1 AND velocidad < 100),
+	vida INTEGER CHECK (vida >= 1 AND vida < 200)
 )
 
-CREATE TABLE entrenador
-(
-  identrenador SERIAL PRIMARY KEY,
-  nombre VARCHAR(20) NOT NULL,
-  origen VARCHAR(50) NOT NULL
+CREATE TABLE entrenador(
+	id_entrenador SERIAL PRIMARY KEY,
+	nombre VARCHAR(25) NOT NULL,
+	origen VARCHAR(50) NOT NULL
 )
 
-CREATE TABLE entrenadores_pokemones (
-    id_entrenador INT NOT NULL,
-    id_pokemon INT NOT NULL,
-    PRIMARY KEY (id_entrenador, id_pokemon),
-    FOREIGN KEY (id_entrenador) REFERENCES entrenadores(id_entrenador),
-    FOREIGN KEY (id_pokemon) REFERENCES pokemon(id_pokemon),
-    UNIQUE (id_entrenador, id_pokemon)
-);
-
+CREATE TABLE entrenadores_pokemones(
+	id_entrenador INTEGER NOT NULL,
+	id_pokemon INTEGER NOT NULL,
+	PRIMARY KEY(id_entrenador, id_pokemon),
+	FOREIGN KEY (id_entrenador) references Entrenador(id_entrenador) ON DELETE CASCADE,
+	FOREIGN KEY (id_pokemon) references Pokemon(id_pokemon) ON DELETE CASCADE
+)
 CREATE TABLE batallas(
-    idbatalla SERIAL PRIMARY KEY,
-    identrenador1 integer NOT NULL,
-    identrenador2 integer NOT NULL,
-    idpokemon1 integer NOT NULL,
-    idpokemon2 integer NOT NULL,
-    fecha date,
-    resultado VARCHAR(30) NOT NULL,
-    FOREIGN KEY (id_entrenador1) REFERENCES entrenadores(id_entrenador),
-    FOREIGN KEY (id_entrenador2) REFERENCES entrenadores(id_entrenador),
-    FOREIGN KEY (id_pokemon1) REFERENCES pokemon(id_pokemon),
-    FOREIGN KEY (id_pokemon2) REFERENCES pokemon(id_pokemon)
+	id_batalla SERIAL PRIMARY KEY,
+	id_entrenador1 INTEGER NOT NULL,
+	id_entrenador2 INTEGER NOT NULL,
+	id_pokemon1 INTEGER NOT NULL,
+	id_pokemon2 INTEGER NOT NULL,
+	fecha DATE,
+	resultado VARCHAR(20) NOT NULL,
+	FOREIGN KEY (id_entrenador1) references Entrenador(id_entrenador) ON DELETE CASCADE,
+	FOREIGN KEY (id_entrenador2) references Entrenador(id_entrenador) ON DELETE CASCADE,
+	FOREIGN KEY (id_pokemon1) references Pokemon(id_pokemon) ON DELETE CASCADE,
+	FOREIGN KEY (id_pokemon2) references Pokemon(id_pokemon) ON DELETE CASCADE
 )
 
 -- VISUALIZAR
