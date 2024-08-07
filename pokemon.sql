@@ -7,14 +7,14 @@ CREATE TABLE pokemon(
   ataque integer CHECK(ataque >= 1 AND ataque <= 100),
   defensa integer CHECK (defensa >= 1 AND defensa <= 100),
   velocidad integer CHECK (velocidad >= 1 AND velocidad <= 100),
-  vida integer CHECK (vida >= 1 AND vida <= 200),
+  vida integer CHECK (vida >= 1 AND vida <= 200)
 )
 
 CREATE TABLE entrenador
 (
   identrenador SERIAL PRIMARY KEY,
   nombre VARCHAR(20) NOT NULL,
-  origen VARCHAR(50) NOT NULL,
+  origen VARCHAR(50) NOT NULL
 )
 
 CREATE TABLE entrenadores_pokemones (
